@@ -27,7 +27,7 @@ import { getModelProvider } from "../utils/model";
 
 let fetchState = 0; // 0 not fetch, 1 fetching, 2 done
 
-const isApp = true;
+const isApp = getClientConfig()?.buildMode === "export";
 
 const DEFAULT_OPENAI_URL = isApp ? OPENAI_BASE_URL : ApiPath.OpenAI;
 
@@ -61,7 +61,7 @@ const DEFAULT_SILICONFLOW_URL = isApp
 
 const DEFAULT_ACCESS_STATE = {
   accessCode: "",
-  useCustomConfig: true,
+  useCustomConfig: false,
 
   provider: ServiceProvider.OpenAI,
 
