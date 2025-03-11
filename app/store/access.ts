@@ -1,22 +1,22 @@
 import {
-  GoogleSafetySettingsThreshold,
-  ServiceProvider,
-  StoreKey,
-  ApiPath,
-  OPENAI_BASE_URL,
+  ALIBABA_BASE_URL,
   ANTHROPIC_BASE_URL,
-  GEMINI_BASE_URL,
+  ApiPath,
   BAIDU_BASE_URL,
   BYTEDANCE_BASE_URL,
-  ALIBABA_BASE_URL,
-  TENCENT_BASE_URL,
-  MOONSHOT_BASE_URL,
-  STABILITY_BASE_URL,
-  IFLYTEK_BASE_URL,
-  DEEPSEEK_BASE_URL,
-  XAI_BASE_URL,
   CHATGLM_BASE_URL,
+  DEEPSEEK_BASE_URL,
+  GEMINI_BASE_URL,
+  GoogleSafetySettingsThreshold,
+  IFLYTEK_BASE_URL,
+  MOONSHOT_BASE_URL,
+  OPENAI_BASE_URL,
+  ServiceProvider,
   SILICONFLOW_BASE_URL,
+  STABILITY_BASE_URL,
+  StoreKey,
+  TENCENT_BASE_URL,
+  XAI_BASE_URL,
 } from "../constant";
 import { getHeaders } from "../client/api";
 import { getClientConfig } from "../config/client";
@@ -27,7 +27,7 @@ import { getModelProvider } from "../utils/model";
 
 let fetchState = 0; // 0 not fetch, 1 fetching, 2 done
 
-const isApp = getClientConfig()?.buildMode === "export";
+const isApp = true;
 
 const DEFAULT_OPENAI_URL = isApp ? OPENAI_BASE_URL : ApiPath.OpenAI;
 
