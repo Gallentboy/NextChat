@@ -24,7 +24,6 @@ import { DeepSeekApi } from "./platforms/deepseek";
 import { XAIApi } from "./platforms/xai";
 import { ChatGLMApi } from "./platforms/glm";
 import { SiliconflowApi } from "./platforms/siliconflow";
-import { getServerSideConfig } from "@/app/config/server";
 
 export const ROLES = ["system", "user", "assistant"] as const;
 export type MessageRole = (typeof ROLES)[number];
@@ -342,13 +341,10 @@ export function getHeaders(ignoreHeaders: boolean = false) {
     apiKey,
     isAzure || isAnthropic || isGoogle,
   );
-
-  console.log(getServerSideConfig().apiKey);
-
   if (bearerToken) {
     headers[authHeader] = bearerToken;
   } else if (isByteDance) {
-    headers[authHeader] = bearerToken;
+    headers[authHeader] = getBearerToken(process.env.BYTEDANCE_API_KEY!!);
   } else if (isEnabledAccessControl && validString(accessStore.accessCode)) {
     headers["Authorization"] = getBearerToken(
       ACCESS_CODE_PREFIX + accessStore.accessCode,
