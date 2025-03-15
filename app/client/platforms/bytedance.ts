@@ -18,7 +18,6 @@ import {
 } from "../api";
 
 import { streamWithThink } from "@/app/utils/chat";
-import { getClientConfig } from "@/app/config/client";
 import { preProcessImageContent } from "@/app/utils/chat";
 import {
   getMessageTextContentWithoutThinking,
@@ -53,16 +52,7 @@ export class DoubaoApi implements LLMApi {
   path(path: string): string {
     const accessStore = useAccessStore.getState();
 
-    let baseUrl = "";
-
-    if (accessStore.useCustomConfig) {
-      baseUrl = accessStore.bytedanceUrl;
-    }
-
-    if (baseUrl.length === 0) {
-      const isApp = !!getClientConfig()?.isApp;
-      baseUrl = isApp ? BYTEDANCE_BASE_URL : ApiPath.ByteDance;
-    }
+    let baseUrl = BYTEDANCE_BASE_URL;
 
     if (baseUrl.endsWith("/")) {
       baseUrl = baseUrl.slice(0, baseUrl.length - 1);
