@@ -341,7 +341,6 @@ export function getHeaders(ignoreHeaders: boolean = false) {
     apiKey,
     isAzure || isAnthropic || isGoogle,
   );
-  console.log(accessStore.bytedanceApiKey);
   if (bearerToken) {
     headers[authHeader] = bearerToken;
   } else if (isEnabledAccessControl && validString(accessStore.accessCode)) {
