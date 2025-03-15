@@ -332,8 +332,6 @@ export function getHeaders(ignoreHeaders: boolean = false) {
     apiKey,
     isEnabledAccessControl,
   } = getConfig();
-
-  console.log(isByteDance, isXAI, apiKey);
   // when using baidu api in app, not set auth header
   if (isBaidu && clientConfig?.isApp) return headers;
 
@@ -344,8 +342,6 @@ export function getHeaders(ignoreHeaders: boolean = false) {
     apiKeys.length == 1
       ? apiKeys[0]
       : apiKeys[Math.floor(Math.random() * apiKeys.length)];
-
-  console.log(apiKeys, newApiKey);
   const bearerToken = getBearerToken(
     newApiKey,
     isAzure || isAnthropic || isGoogle,
