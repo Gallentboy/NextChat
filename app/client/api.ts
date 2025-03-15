@@ -270,7 +270,7 @@ export function getHeaders(
       ? accessStore.azureApiKey
       : isAnthropic
       ? accessStore.anthropicApiKey
-      : isByteDance
+      : isByteDance && provider == ModelProvider.Doubao
       ? accessStore.bytedanceApiKey
       : isAlibaba
       ? accessStore.alibabaApiKey
