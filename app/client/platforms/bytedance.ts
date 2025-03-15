@@ -1,5 +1,10 @@
 "use client";
-import { ApiPath, ByteDance, BYTEDANCE_BASE_URL } from "@/app/constant";
+import {
+  ApiPath,
+  ByteDance,
+  BYTEDANCE_BASE_URL,
+  ModelProvider,
+} from "@/app/constant";
 import {
   ChatMessageTool,
   useAccessStore,
@@ -111,7 +116,7 @@ export class DoubaoApi implements LLMApi {
         method: "POST",
         body: JSON.stringify(requestPayload),
         signal: controller.signal,
-        headers: getHeaders(),
+        headers: getHeaders(false, ModelProvider.Doubao),
       };
 
       // make a fetch request
@@ -129,7 +134,7 @@ export class DoubaoApi implements LLMApi {
         return streamWithThink(
           chatPath,
           requestPayload,
-          getHeaders(),
+          getHeaders(false, ModelProvider.Doubao),
           tools as any,
           funcs,
           controller,

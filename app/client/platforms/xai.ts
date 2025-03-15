@@ -1,6 +1,6 @@
 "use client";
 // azure and openai, using same models. so using same LLMApi.
-import { ApiPath, XAI_BASE_URL, XAI } from "@/app/constant";
+import { ApiPath, XAI_BASE_URL, XAI, ModelProvider } from "@/app/constant";
 import {
   useAccessStore,
   useAppConfig,
@@ -98,7 +98,7 @@ export class XAIApi implements LLMApi {
         method: "POST",
         body: JSON.stringify(requestPayload),
         signal: controller.signal,
-        headers: getHeaders(),
+        headers: getHeaders(false, ModelProvider.XAI),
       };
 
       // make a fetch request

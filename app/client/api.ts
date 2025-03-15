@@ -5,8 +5,8 @@ import {
   ServiceProvider,
 } from "../constant";
 import {
-  ChatMessageTool,
   ChatMessage,
+  ChatMessageTool,
   ModelType,
   useAccessStore,
   useChatStore,
@@ -197,7 +197,6 @@ export class ClientApi {
         },
       ]);
 
-    console.log("[Share]", messages, msgs);
     const clientConfig = getClientConfig();
     const proxyUrl = "/sharegpt";
     const rawUrl = "https://sharegpt.com/api/conversations";
@@ -214,7 +213,6 @@ export class ClientApi {
     });
 
     const resJson = await res.json();
-    console.log("[Share]", resJson);
     if (resJson.id) {
       return `https://shareg.pt/${resJson.id}`;
     }
@@ -234,7 +232,10 @@ export function validString(x: string): boolean {
   return x?.length > 0;
 }
 
-export function getHeaders(ignoreHeaders: boolean = false) {
+export function getHeaders(
+  ignoreHeaders: boolean = false,
+  provider?: ModelProvider,
+) {
   const accessStore = useAccessStore.getState();
   const chatStore = useChatStore.getState();
   let headers: Record<string, string> = {};
@@ -337,15 +338,18 @@ export function getHeaders(ignoreHeaders: boolean = false) {
 
   const authHeader = getAuthHeader();
 
-  const apiKeys = apiKey.split(/[,;；，]/).map((v) => v.trim());
-  const newApiKey =
-    apiKeys.length == 1
-      ? apiKeys[0]
-      : apiKeys[Math.floor(Math.random() * apiKeys.length)];
-  const bearerToken = getBearerToken(
-    newApiKey,
-    isAzure || isAnthropic || isGoogle,
-  );
+  let bearerToken;
+  if (provider == ModelProvider.Doubao) {
+    const apiKeys = apiKey.split(/[,;；，]/).map((v) => v.trim());
+    const newApiKey =
+      apiKeys.length == 1
+        ? apiKeys[0]
+        : apiKeys[Math.floor(Math.random() * apiKeys.length)];
+    bearerToken = getBearerToken(newApiKey, isAzure || isAnthropic || isGoogle);
+  } else {
+    bearerToken = getBearerToken(apiKey, isAzure || isAnthropic || isGoogle);
+  }
+
   if (bearerToken) {
     headers[authHeader] = bearerToken;
   } else if (isEnabledAccessControl && validString(accessStore.accessCode)) {
