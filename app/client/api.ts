@@ -333,7 +333,6 @@ export function getHeaders(ignoreHeaders: boolean = false) {
     isEnabledAccessControl,
   } = getConfig();
 
-  console.log(getConfig());
   // when using baidu api in app, not set auth header
   if (isBaidu && clientConfig?.isApp) return headers;
 
