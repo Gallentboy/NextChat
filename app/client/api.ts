@@ -393,6 +393,7 @@ export function getHeaders(ignoreHeaders: boolean = false) {
     headers,
     "authHeader: ",
     authHeader,
+    "----",
   );
   if (bearerToken) {
     headers[authHeader] = bearerToken;
