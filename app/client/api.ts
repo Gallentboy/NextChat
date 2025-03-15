@@ -24,6 +24,7 @@ import { DeepSeekApi } from "./platforms/deepseek";
 import { XAIApi } from "./platforms/xai";
 import { ChatGLMApi } from "./platforms/glm";
 import { SiliconflowApi } from "./platforms/siliconflow";
+import { getServerSideConfig } from "@/app/config/server";
 
 export const ROLES = ["system", "user", "assistant"] as const;
 export type MessageRole = (typeof ROLES)[number];
@@ -342,59 +343,8 @@ export function getHeaders(ignoreHeaders: boolean = false) {
     isAzure || isAnthropic || isGoogle,
   );
 
-  console.log(
-    "apiKek: ",
-    apiKey,
-    bearerToken,
-    authHeader,
-    "isByteDance: ",
-    isByteDance,
-    "isEnabledAccessControl: ",
-    isEnabledAccessControl,
-    "accessStore.accessCode: ",
-    accessStore.accessCode,
-    "bearerToken: ",
-    bearerToken,
-    "headers: ",
-    headers,
-    "authHeader: ",
-    authHeader,
-    "isGoogle: ",
-    isGoogle,
-    "isAzure: ",
-    isAzure,
-    "isAnthropic: ",
-    isAnthropic,
-    "isBaidu: ",
-    isBaidu,
-    "isByteDance: ",
-    isByteDance,
-    "isAlibaba: ",
-    isAlibaba,
-    "isMoonshot: ",
-    isMoonshot,
-    "isIflytek: ",
-    isIflytek,
-    "isDeepSeek: ",
-    isDeepSeek,
-    "isXAI: ",
-    isXAI,
-    "isChatGLM: ",
-    isChatGLM,
-    "isSiliconFlow: ",
-    isSiliconFlow,
-    "isEnabledAccessControl: ",
-    isEnabledAccessControl,
-    "accessStore.accessCode: ",
-    accessStore.accessCode,
-    "bearerToken: ",
-    bearerToken,
-    "headers: ",
-    headers,
-    "authHeader: ",
-    authHeader,
-    "----",
-  );
+  console.log(getServerSideConfig().apiKey);
+
   if (bearerToken) {
     headers[authHeader] = bearerToken;
   } else if (isByteDance) {
