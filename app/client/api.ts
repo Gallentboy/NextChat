@@ -337,8 +337,12 @@ export function getHeaders(ignoreHeaders: boolean = false) {
 
   const authHeader = getAuthHeader();
 
+  const apiKeys = apiKey.split(/[,;；，]/).map((v) => v.trim());
+  const newApiKey = apiKeys[Math.floor(Math.random() * apiKeys.length)];
+
+  console.log(apiKeys);
   const bearerToken = getBearerToken(
-    apiKey,
+    newApiKey,
     isAzure || isAnthropic || isGoogle,
   );
   if (bearerToken) {
