@@ -1,10 +1,10 @@
 "use client";
 import { ApiPath, ByteDance, BYTEDANCE_BASE_URL } from "@/app/constant";
 import {
+  ChatMessageTool,
   useAccessStore,
   useAppConfig,
   useChatStore,
-  ChatMessageTool,
   usePluginStore,
 } from "@/app/store";
 
@@ -17,8 +17,7 @@ import {
   SpeechOptions,
 } from "../api";
 
-import { streamWithThink } from "@/app/utils/chat";
-import { preProcessImageContent } from "@/app/utils/chat";
+import { preProcessImageContent, streamWithThink } from "@/app/utils/chat";
 import {
   getMessageTextContentWithoutThinking,
   getTimeoutMSByModel,
